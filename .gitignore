@@ -1,0 +1,33 @@
+/media
+/static
+.tags*
+touchme
+/.idea/*.*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/*
+*.py[cod]
+
+# Local
+root/settings/local.py
+uwsgi_local.ini
+
+# uwsgi
+/*.pid
+/*.db
+/*.log
+
+/.idea
+/venv/
+/log
+log
+venv/
+/.project
+.cache
+
+# docs
+/docs/_build
+/docs/_static
+/docs/_templates
+/Makefile
+/local.ini
