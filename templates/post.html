@@ -1,0 +1,11 @@
+<div class="col-sm-8 blog-main">
+
+    {% block content %}
+        {% for post in object_list %}
+        <div class="blog-post">
+           {{ object.title }}
+        </div>
+        {% endfor %}
+    {% endblock %}
+    {% include 'nav.html' %}
+</div>
