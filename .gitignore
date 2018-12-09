@@ -16,7 +16,7 @@ uwsgi_local.ini
 /*.pid
 /*.db
 /*.log
-
+/*.sqlite3
 /.idea
 /venv/
 /log
