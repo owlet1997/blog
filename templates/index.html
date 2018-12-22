@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
+{% load blog_tags %}
 
-{
 {% block content %}
-    {% for post in object_list %}
-        <div class="blog-post">
-            <h2 class="blog-post-title">{{ post.title }}</h2>
-            <p class="blog-post-meta">{{ post.created }} by {{ post.user }}</p>
-            {{ post.text|safe }}
-        </div>
-    {% endfor %}
+  {% for post in object_list %}
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{ post.title }}</h2>
+      <p class="blog-post-meta">{{ post.created }} by {{ post.user }}</p>
+      {{ post.preambula|safe }}
+      <p class="text-right">
+        {{ post.comments.count }} {{ post.comments.count|rupluralize:'комментарий,комментария,комментариев' }}&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary" href="{% url 'detail_view' post.slug %}" role="button">Подробнее »</a>
+      </p>
+    </div>
+  {% endfor %}
+
+  {% if is_paginated %}
+    <nav>
+      <ul class="pager">
+        {% if page_obj.has_previous %}
+          <li><a href="/?page={{ page_obj.previous_page_number }}">Предыдущие</a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+          <li><a href="/?page={{ page_obj.next_page_number }}">Следующие</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+  {% endif %}
+
 {% endblock content %}

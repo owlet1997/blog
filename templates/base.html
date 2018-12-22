@@ -8,18 +8,23 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
-{% include 'musthead.html' %}
+{% block bootstrap3_title %}
+  {% block title %}{{ title }}{% endblock %}
+{% endblock %}
 
-<div class="container">
+{% block bootstrap3_content %}
+  {% include 'musthead.html' %}
+
+  <div class="container">
     {% include 'header.html' %}
     <div class="row">
-
-        <div class="col-sm-8 blog-main">
-            {% block content %}
-            {% endblock content %}
-        </div>
-        {% include 'sidebar.html' %}
-
+      <div class="col-sm-8 blog-main">
+        {% block content %}
+        {% endblock content %}
+      </div>
+      {% include 'sidebar.html' %}
     </div>
-</div>
-{% include 'footer.html' %}
+  </div>
+  {% include 'footer.html' %}
+
+{% endblock %}

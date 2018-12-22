@@ -1,11 +1,17 @@
 <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item active" href="#">Home</a>
-          <a class="blog-nav-item" href="#">New features</a>
-          <a class="blog-nav-item" href="#">Press</a>
-          <a class="blog-nav-item" href="#">New hires</a>
-          <a class="blog-nav-item" href="#">About</a>
-        </nav>
-      </div>
+  <div class="container">
+    <nav class="blog-nav">
+      <a class="blog-nav-item{% if flatpage.url == '/' %} active{% endif %}" href="{% url 'index' %}">Домой</a>
+      <a class="blog-nav-item{% if flatpage.url == '/about/' %} active{% endif %}" href="{% url 'about' %}">Обо мне</a>
+      {% if request.user.is_authenticated %}
+        <span
+            class="blog-nav-item nav-bar-right">({{ request.user.first_name|first }} {{ request.user.last_name|first }})
+        </span>
+        <a class="blog-nav-item nav-bar-right" href="/accounts/logout">Выйти</a>
+      {% else %}
+        <a class="blog-nav-item nav-bar-right" href="/accounts/vk/login">Войти (VK авторизация)</a>
+      {% endif %}
+    </nav>
+
+  </div>
 </div>

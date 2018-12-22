@@ -1,11 +1,11 @@
-<div class="col-sm-8 blog-main">
+{% extends 'base.html' %}
 
-    {% block content %}
-        {% for post in object_list %}
-        <div class="blog-post">
-           {{ object.title }}
-        </div>
-        {% endfor %}
-    {% endblock %}
-    {% include 'nav.html' %}
-</div>
+{% block content %}
+  <div class="blog-post">
+    <h2 class="blog-post-title">{{ object.title }}</h2>
+    <p class="blog-post-meta">{{ object.created }} by {{ object.user }}</p>
+    {{ object.preambula|safe }}
+    {{ object.text|safe }}
+  </div>
+  {% include 'comments.html' %}
+{% endblock content %}

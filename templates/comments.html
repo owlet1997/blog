@@ -1,0 +1,67 @@
+{% load static %}
+{% if request.user.is_authenticated %}
+
+  <div class="container">
+    <div class="row">
+      <form id="comment-form" method="post" action="">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="hidden" name="post_id" value="{{ object.id }}">
+          <input class="form-control" placeholder="Добавить комментарий" type="text" name="comment_text">
+          <span class="input-group-addon">
+            <a href="" id="add_comment"><i class="glyphicon glyphicon-pencil"></i></a>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% else %}
+  <p>Оставлять комментарии могут только зарегистрированные пользователи. <a href="/accounts/vk/login">Войти</a></p>
+{% endif %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="page-header">Коментарии :</h2>
+      <section class="comment-list">
+        {% for comment in object.comments.all %}
+          <article class="row">
+            <div class="col-md-3 col-sm-3 hidden-xs">
+              <figure class="thumbnail">
+                <img class="img-responsive" src="{% static 'img/user-avatar-placeholder.png' %}"/>
+                <figcaption class="text-center">{{ comment.user }}</figcaption>
+              </figure>
+            </div>
+            <div class="col-md-9 col-sm-9">
+              <div class="panel panel-default arrow left">
+                <div class="panel-body">
+                  <header class="text-left">
+                    <time class="comment-date" datetime="16-12-2014 01:05"><i
+                        class="fa fa-clock-o"></i>{{ comment.created }}</time>
+                  </header>
+                  <div class="comment-post">
+                    {{ comment.text|safe }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </section>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function (event) {
+        let $commentForm = $("#comment-form");
+
+        $("#add_comment").on("click", function (e) {
+            e.preventDefault()
+            $commentForm.submit()
+        })
+
+    });
+</script>
+
